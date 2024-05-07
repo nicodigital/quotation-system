@@ -7,7 +7,7 @@ function smoothAnchors(){
     item.addEventListener('click', (e) => {
 
       const target = item.getAttribute('data-anchor');
-      const offset = document.querySelector(target).offsetTop;
+      const offset = document.querySelector(target).offsetTop - 100;
 
       const scrollOptions = {
         top: offset,
