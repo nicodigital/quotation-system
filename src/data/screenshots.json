@@ -1,0 +1,61 @@
+[
+  {
+    "caseId": "dashboard",
+    "src": [
+      ["img1", "img/1920x1080.svg"],
+      ["img2", "img/1920x1080.svg"]
+    ],
+    "before": "Antes de actualizar",
+    "title": "Antes de actualizar",
+    "after": "Después de actualizar"
+  },
+  {
+    "caseId": "about",
+    "src": [
+      ["img3", "img/1920x1080.svg"],
+      ["img4", "img/1920x1080.svg"]
+    ],
+    "before": "Antes de actualizar",
+    "title": "Núcleo de Wordpress",
+    "after": "Después de actualizar"
+  },
+  {
+    "caseId": "plugins",
+    "src": [
+      ["img5", "img/1920x1080.svg"],
+      ["img6", "img/1920x1080.svg"]
+    ],
+    "before": "Antes de actualizar",
+    "title": "Plugins",
+    "after": "Después de actualizar"
+  },
+  {
+    "caseId": "themes",
+    "src": [
+      ["img7", "img/1920x1080.svg"],
+      ["img8", "img/1920x1080.svg"]
+    ],
+    "before": "Antes de actualizar",
+    "title": "Themes",
+    "after": "Después de actualizar"
+  },
+  {
+    "caseId": "firewall",
+    "src": [
+      ["img9", "img/1920x1080.svg"],
+      ["img10", "img/1920x1080.svg"]
+    ],
+    "before": "Antes de actualizar",
+    "title": "Firewall",
+    "after": "Después de actualizar"
+  },
+  {
+    "caseId": "health",
+    "src": [
+      ["img11", "img/1920x1080.svg"]
+    ],
+    "before": "",
+    "title": "Health Check",
+    "after": ""
+  }
+]

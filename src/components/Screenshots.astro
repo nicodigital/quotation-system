@@ -1,0 +1,111 @@
+---
+import { Icon } from "astro-icon/components";
+import "../css/components/screenshots.css";
+import slugify from "../js/slugify.js";
+const { caseId, src, before, title, after } = Astro.props;
+
+const slug = slugify(caseId);
+
+function checkScreens(objeto) {
+  if (objeto.before_img && objeto.after_img) {
+    return true;
+  }
+  return false;
+}
+
+const before_webp = `${src.before_img.url}.webp`;
+const after_webp = `${src.after_img.url}.webp`;
+
+---
+
+<section id={slug} class="scroll-case section-b screenshots">
+  <!-- Heading -->
+    <div class="row mb-2">
+      {
+        checkScreens(src) && (
+            <div class="col-[1/5] xg:col-[1/5] hidden xg:block">
+              <div>{before}</div>
+            </div>
+            <div class="col-[1/5] md:col-[1/13] xg:col-[5/9] text-center">
+              <h3 class="font-extrabold">{title}</h3>
+            </div>
+            <div class="col-[1/5] xg:col-[9/13] text-right hidden xg:block">
+              <div>{after}</div>
+            </div>
+        )
+      }
+      {
+        checkScreens(src) === false && (
+          <div class="col-[1/5] md:col-[1/13] xg:col-[1/13] text-center">
+            <h3 class="font-extrabold">{title}</h3>
+          </div>
+        )
+      }
+    </div>
+
+  <!-- Screenshot -->
+  <div class="row">
+    {
+      checkScreens(src) && ( // 2 screenshots
+          <div class="col-[1/5] md:col-[1/13] xg:col-[1/7]">
+            <figure class="items-center xg:items-start">
+              <picture>
+                <source srcset={before_webp} type="image/webp">
+                <source srcset={src.before_img.url} type="image/jpeg">
+                <img
+                  src={before_webp}
+                  data-modal={`screen-${src.before_img.ID}`}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                  class="m-link"
+                />
+              </picture>
+              <Icon name="mdi:arrow-expand" size="3rem" />
+              <figcaption>{before}</figcaption>
+            </figure>
+          </div>
+          <div class="col-[1/5] md:col-[1/13] xg:col-[7/13]">
+            <figure class="items-center xg:items-end">
+              <picture>
+                <source srcset={after_webp} type="image/webp">
+                <source srcset={src.after_img.url} type="image/jpeg">
+                <img
+                  src={after_webp}
+                  data-modal={`screen-${src.after_img.ID}`}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                  class="m-link"
+                />
+              </picture>
+              <Icon name="mdi:arrow-expand" size="3rem" />
+              <figcaption>{after}</figcaption>
+            </figure>
+          </div>
+      )
+    }
+    {
+      checkScreens(src) === false && ( // 1 solo screenshot
+        <div class="col-[1/5] md:col-[1/13] xg:col-[1/13]">
+          <figure class="items-center xg:items-start">
+            <picture>
+                <source srcset={before_webp} type="image/webp">
+                <source srcset={src.before_img.url} type="image/jpeg">
+                <img
+                  src={before_webp}
+                  data-modal={`screen-${src.before_img.ID}`}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                  class="m-link"
+                />
+              </picture>
+            <Icon name="mdi:arrow-expand" size="3rem" />
+            <figcaption>Antes de actualizar</figcaption>
+          </figure>
+        </div>
+      )
+    }
+  </div>
+</section>

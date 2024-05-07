@@ -1,0 +1,13 @@
+header{
+    @apply 
+        h-[12rem]
+        md:h-[15rem]
+}
+
+.brand{
+    @apply 
+    relative block 
+    w-[15rem]
+    top-1 xg:top-0
+    transition-all;
+}

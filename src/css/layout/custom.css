@@ -1,0 +1,35 @@
+.wp-block-columns{
+  @apply flex flex-col md:flex-row gap-[2rem]
+    mb-4 md:mb-0;
+}
+
+.wp-block-column{
+  @apply flex-1;
+
+  ul{
+    @apply list-disc leading-[1.7];
+  }
+
+}
+
+.wp-block-heading{
+  @apply font-bold;
+}
+
+.price{
+  @apply mt-[-6rem];
+}
+
+
+/*//////////////////////////////////////////////////////////*/
+/*///////////////////////// 768px //////////////////////////*/
+/*//////////////////////////////////////////////////////////*/
+
+@media (min-width: theme("screens.md")) {
+
+  :not(.heading) > .wp-block-columns > .wp-block-column:not(.mb-0){
+    @apply mb-10;
+  }
+  
+}
+

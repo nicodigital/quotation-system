@@ -1,0 +1,44 @@
+#go-top{
+        
+  @apply
+      fixed
+      bottom-0
+      right-[1rem]
+      xg:bottom-[3.5rem]
+      xg:right-[3.5rem]
+      translate-y-full
+      xg:translate-y-[200%]
+      transition-all
+      rounded-full
+      z-[99];
+
+      svg{
+          path{
+            @apply transition-all;
+              fill: black;
+          }
+      }
+
+}
+
+body{
+
+  &:not([data-scroll="top"]){
+
+    #go-top{
+        @apply
+        translate-y-[-100%]
+        xg:translate-y-[0]
+    }
+  
+  }
+
+  &[data-scroll="bottom"] {
+
+    #go-top {
+      @apply xg:bottom-[8rem]
+    }
+
+  }
+
+}

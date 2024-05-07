@@ -1,0 +1,67 @@
+---
+import "swiper/css";
+// const { slides } = Astro.props;
+import Picture from '../components/Picture.astro'
+
+const response = await fetch('http://api.id.net.uy/wp-json/wp/v2/pages?slug=ufilms');
+const getData = await response.json();
+const hero = getData[0].acf.hero;
+---
+
+<style>
+  h3 {
+    @apply font-bold absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
+  }
+  img {
+    @apply h-[66vh] xg:h-[85vh] w-full object-cover object-center grayscale;
+  }
+</style>
+
+<!-- Slider main container -->
+<div class="swiper bg-neutral-600">
+  <!-- Additional required wrapper -->
+  <div class="swiper-wrapper">
+    {
+      hero.slider.map((slide) => (
+        <div class="swiper-slide">
+          <Picture 
+              url={slide.imagen.url} 
+              style="grayscale h-[100vh]"
+              />
+        </div>
+      ))
+    }
+  </div>
+  <!-- If we need pagination -->
+  <div class="swiper-pagination"></div>
+
+  <!-- If we need navigation buttons -->
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
+
+  <!-- If we need scrollbar -->
+  <div class="swiper-scrollbar"></div>
+</div>
+
+<script>
+  import Swiper from "swiper";
+
+  function swiperSlider() {
+    const SwiperSlider = new Swiper(".swiper", {
+      slidesPerView: 1,
+      spaceBetween: 0,
+      loop: true,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    });
+  }
+
+  swiperSlider();
+  document.addEventListener("astro:after-swap", swiperSlider);
+</script>

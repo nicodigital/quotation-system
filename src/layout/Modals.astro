@@ -1,0 +1,28 @@
+---
+import Modal from "@/components/Modal.astro";
+const { modalID } = Astro.props;
+
+const response = await fetch(import.meta.env.API_SOFT);
+const getSites = await response.json();
+const currSite = getSites.find((site) => site.slug == modalID);
+
+---
+
+{
+  currSite.acf.caso.map( ( screens ) => {
+
+    const screenshots = [ screens.before_img , screens.after_img ];
+
+    return screenshots.map((screen) => {
+
+        return <Modal name={`screen-${screen['ID']}`} show="off" type="">
+          <figure>
+            <img src={screen['url']} alt="" loading="lazy" decoding="async" />
+          </figure>
+        </Modal>
+
+  })
+
+  })
+
+}

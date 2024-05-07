@@ -1,0 +1,12 @@
+{
+  "title": "I.A.S",
+  "description": "Sistema de reportes para actualizaciones de software de I+D",
+  "author": {
+    "name" : "Nicolás Gonzalez",
+    "url" : "https://nicowebsite.com"
+  },
+  "image": {
+    "src": "/img/120x600.svg",
+    "alt": "I.A.S"
+  }
+}

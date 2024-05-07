@@ -1,0 +1,78 @@
+  .modal {
+    @apply fixed
+            w-full
+            h-full
+            top-0
+            left-0
+            flex
+            items-center
+            justify-center
+            bg-black/80
+            z-[999]
+            backdrop-blur-sm
+            translate-y-full
+            transition-transform
+            pointer-events-none
+            duration-500;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+
+    * {
+      @apply text-white;
+    }
+
+    &-box {
+      @apply relative
+            flex
+            flex-col
+            items-center
+            justify-center
+            w-full
+            xg:w-[85%]
+            min-h-[50vh]
+            opacity-0;
+          
+          figcaption{
+            @apply flex justify-center text-white pb-2;
+          }
+    }
+
+    .close {
+      @apply absolute
+            top-2
+            right-2
+            size-4
+            z-[99]
+            cursor-pointer
+            text-white;
+
+      &:before,
+      &:after {
+        position: absolute;
+        content: "";
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(45deg);
+        width: 0.3rem;
+        height: 3.2rem;
+        background: currentColor;
+      }
+
+      &:after {
+        transform: translate(-50%, -50%) rotate(-45deg);
+      }
+    }
+
+    &[data-show="on"] {
+
+      pointer-events: auto;
+      overflow-y: auto;
+      transform: translateY(0);
+
+      .modal-box{
+        @apply opacity-100;
+      }
+
+    }
+
+  }

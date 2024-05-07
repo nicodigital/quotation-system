@@ -1,0 +1,42 @@
+.screenshots {
+
+  figure{
+    @apply relative flex flex-col-reverse xg:bg-black rounded-lg cursor-pointer overflow-hidden;
+
+    svg{
+
+      @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-0 z-50 transition-all;
+
+      path{
+        fill: #fff;
+      }
+
+    }
+
+    &:hover{
+      @apply shadow-xl;
+    }
+
+  }
+
+  img{
+    @apply transition-all;
+
+    &:hover{
+        @apply opacity-50;
+
+        & + svg{
+          @apply w-[3rem];
+        }
+    }
+
+  }
+
+  figcaption{
+    @apply pb-1 xg:hidden;
+  }
+
+ 
+
+}
+

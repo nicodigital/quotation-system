@@ -1,0 +1,51 @@
+nav {
+  @apply flex flex-col gap-[1px];
+
+  a {
+    @apply relative flex w-fit
+        text-body
+        transition-all ease-in-out duration-[275ms]	;
+
+    &.active{
+
+      path{
+        fill: #444;
+      }
+      
+    }
+
+
+    svg{
+      @apply size-2;
+    }
+
+    span {
+
+      @apply bg-black text-white transition-all ease-in-out duration-[275ms];
+
+      &:first-child {
+        @apply flex justify-center items-center flex-1
+        w-[var(--sidebar-width)] py-[1.3rem] xg:py-1
+        font-extrabold;
+      }
+
+      &:last-child {
+        @apply w-0 hidden xg:block overflow-hidden
+             text-transparent py-1;
+        white-space: nowrap;
+      }
+
+    }
+
+    &:hover {
+
+      span {
+
+        &:last-child{
+          @apply  w-fit text-white px-2 border-l-[3px] border-white;
+        }
+        
+      }
+    }
+  }
+}

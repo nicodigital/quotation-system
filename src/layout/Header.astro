@@ -1,0 +1,27 @@
+---
+import getSlug from '@/js/getSlug';
+import "../css/layout/header.css";
+import Brand from "../components/Brand.astro";
+import formatDate from '../js/formatDate';
+
+const currentPath = Astro.url.pathname;
+const currPage = getSlug(currentPath);
+
+const response = await fetch(import.meta.env.API_QUOTES);
+const QUOTES = await response.json();
+const currQuote = QUOTES.find((quote) => quote.slug == currPage);
+const formattedDate = formatDate(currQuote.date);
+
+---
+
+<header class="container row pt-2 xg:py-4">
+  <div class="col-[1/3] md:col-[1/7] xg:col-[1/7]">
+      <Brand/>
+  </div>
+  <div class="col-[3/5] md:col-[7/13] xg:hidden text-right">
+    {formattedDate}
+  </div>
+  <div class="col-[1/5] md:col-[1/7] xg:col-[7/13] flex justify-end">
+    <div class="hidden xg:block">{formattedDate}</div>
+  </div>
+</header>

@@ -1,0 +1,59 @@
+---
+import Layout from "../../layout/Layout.astro";
+import Heading from "../../components/Heading.astro";
+import formatDate from '../../js/formatDate';
+
+// Esta función solo es necesaria en caso de preRendered
+export async function getStaticPaths() {
+  const response = await fetch(import.meta.env.API_QUOTES);
+  const QUOTES = await response.json();
+
+  return QUOTES.map((sitio) => {
+    let slug: string;
+    slug = sitio.slug;
+
+    if (sitio.status == "publish") {
+      return {
+        params: {
+          quote: slug,
+        },
+      };
+    }
+  });
+}
+
+const { quote } = Astro.params;
+const response = await fetch(import.meta.env.API_QUOTES);
+const QUOTES = await response.json();
+const currQuote = QUOTES.find((q) => q.slug == quote);
+
+const formattedDate = formatDate(currQuote.date);
+
+---
+
+<Layout
+  title={` Presupuesto ${formattedDate} • `}
+  claim=""
+  description={`Reporte de Actualización de Software realizado el , en el sitio web `}
+>
+  <div class="container">
+    <section class="scroll-case row section-b md:mb-5 xg:mb-0">
+      <div class="col-[1/5] md:col-[1/13] xg:col-[3/11] pl-2 xg:pl-0">
+        
+        <div class="wp-block-columns">
+          <div class="wp-block-column" style="flex-basis:33.33%"> &nbsp; </div>
+          <div class="wp-block-column mb-0" style="flex-basis:66.66%">
+            <h1 class="text-big">
+              {currQuote.title.rendered}
+            </h1>
+          </div>
+        </div>
+
+        <Heading serv={currQuote.acf.service} />
+
+        <Fragment set:html={currQuote.content.rendered} />
+
+      </div>
+    </section>
+  </div>
+</Layout>

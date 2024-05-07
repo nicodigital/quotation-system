@@ -1,0 +1,43 @@
+---
+import { Icon } from "astro-icon/components";
+import getSlug from "@/js/getSlug";
+import "../css/layout/menu.css";
+
+const currentPath = Astro.url.pathname;
+const  quote = getSlug(currentPath);
+
+const response = await fetch(import.meta.env.API_QUOTES);
+const QUOTES = await response.json();
+const currQuote = QUOTES.find((q) => q.slug == quote);
+// console.log(currentPath)
+---
+
+<nav>
+  {
+    currQuote.acf.menu_items.map((item) => {
+
+      const currAnchor = currentPath +'#'+ item.ancla;
+
+      return(
+          <a href={currAnchor} >
+            <span>
+              <Icon name={item.icon} size="2rem" />
+            </span>
+            <span>{item.label}</span>
+          </a>
+        );
+ 
+    })
+  }
+</nav>
+
+
+<!-- <script>
+  const navItems = document.querySelectorAll('nav a');
+  navItems.forEach((item) => {  
+    item.addEventListener('click', (e) => {
+      navItems.forEach( i => i.classList.remove('active'));
+      item.classList.add('active');
+    })
+  })
+</script> -->
