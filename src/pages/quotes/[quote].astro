@@ -35,9 +35,9 @@ const formattedDate = formatDate(currQuote.date);
 ---
 
 <Layout
-  title={` Presupuesto ${formattedDate} • `}
+  title={` ${currQuote.title.rendered} — Presupuesto Web por Nicolás González • ${formattedDate}`}
   claim=""
-  description={`Reporte de Actualización de Software realizado el , en el sitio web `}
+  description={`Presupuesto Web realizado por Nicolás González, el ${formattedDate}, para ${currQuote.title.rendered} `}
 >
   <div class="container">
     <section class="scroll-case row section-b md:mb-5 xg:mb-0">

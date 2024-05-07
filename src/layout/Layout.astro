@@ -2,7 +2,6 @@
 import "@fontsource/public-sans";
 import "@fontsource/public-sans/600.css"
 import "@fontsource/public-sans/700.css"
-// import { ViewTransitions } from "astro:transitions";
 
 import getSlug from '@/js/getSlug';
 import getFirstUrlTerm from '@/js/getFirstUrlTerm';
@@ -11,9 +10,6 @@ import "@/css/global.css";
 import Header from "./Header.astro";
 import Footer from "./Footer.astro";
 import Seo from "@/components/Seo.astro";
-// import getSlug from '@/js/getSlug'
-
-// import Burger from "../components/Burger.astro";
 import Menu from "../components/Menu.astro";
 
 const siteURL = import.meta.env.SITE;
@@ -49,7 +45,7 @@ if( currPage === '' ){
     <link rel="icon" href="/img/favicon.svg" sizes="any" type="image/svg+xml" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <Seo {title} {description} {image} {author} {author_url}  {robots} />
+    <Seo {title} {description} {image} {author} {author_url} {robots} />
     <meta http-equiv="cleartype" content="on" />
     <meta name="MobileOptimized" content="width" />
     <meta name="HandheldFriendly" content="true" />
@@ -59,7 +55,6 @@ if( currPage === '' ){
       content="black-translucent"
     />
     <meta name="format-detection" content="telephone=no" />
-    <!-- <ViewTransitions /> -->
   </head>
   <body id="top" data-page={dataPage} data-scroll="top" >
 
