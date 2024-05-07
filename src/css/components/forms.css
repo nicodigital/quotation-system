@@ -7,8 +7,6 @@
 
 [name="form"] {
 
-    @apply w-full;
-
     .field{
       @apply relative;
     }
@@ -19,7 +17,7 @@
         w-full 
         bg-transparent 
         border-b
-       border-b-white 
+       border-b-black 
         py-2 
         pr-1 
         shadow-none 
@@ -41,6 +39,10 @@
         border-color: var(--invalid-color);
       }
 
+    }
+
+    ::placeholder {
+      color: #000 !important;
     }
 
     textarea {

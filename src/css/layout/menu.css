@@ -1,9 +1,9 @@
 nav {
   @apply flex flex-col gap-[1px];
 
-  a {
+  div {
     @apply relative flex w-fit
-        text-body
+        text-body cursor-pointer
         transition-all ease-in-out duration-[275ms]	;
 
     &.active{

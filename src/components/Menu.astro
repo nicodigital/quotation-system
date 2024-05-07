@@ -16,15 +16,16 @@ const currQuote = QUOTES.find((q) => q.slug == quote);
   {
     currQuote.acf.menu_items.map((item) => {
 
-      const currAnchor = currentPath +'#'+ item.ancla;
+      // const currAnchor = currentPath +'#'+ item.ancla;
+      const currAnchor = '#'+ item.ancla;
 
       return(
-          <a href={currAnchor} >
+          <div class="anchor" data-anchor={currAnchor} >
             <span>
               <Icon name={item.icon} size="2rem" />
             </span>
             <span>{item.label}</span>
-          </a>
+          </div>
         );
  
     })
@@ -33,11 +34,11 @@ const currQuote = QUOTES.find((q) => q.slug == quote);
 
 
 <!-- <script>
-  const navItems = document.querySelectorAll('nav a');
+  const navItems = document.querySelectorAll('nav div ');
   navItems.forEach((item) => {  
     item.addEventListener('click', (e) => {
-      navItems.forEach( i => i.classList.remove('active'));
-      item.classList.add('active');
-    })
+      // Change status
+      // navItems.forEach( i => i.classList.remove('active'));
+      // item.classList.add('active');
   })
 </script> -->

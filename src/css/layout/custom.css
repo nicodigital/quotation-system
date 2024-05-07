@@ -16,8 +16,25 @@
   @apply font-bold;
 }
 
+h2.wp-block-heading{
+  @apply text-h2
+}
+
+
+h3.wp-block-heading{
+  @apply text-h3
+}
+
 .price{
   @apply mt-[-6rem];
+}
+
+.price-mobile{
+  @apply xg:hidden;
+}
+
+.price-desktop{
+  @apply hidden xg:block;
 }
 
 

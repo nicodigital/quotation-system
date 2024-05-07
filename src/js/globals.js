@@ -1,6 +1,7 @@
 import checkDevice from '../js/checkDevice'
 import smoothScroll from "../js/smoothscroll"
 import scrollMarkers from "../js/scrollMarkers"
+import smoothAnchors from "../js/smoothAnchors"
 // import menuScrollStatus from '../js/menuScrollStatus'
 import smartMenu from "../js/smartMenu"
 // import menuMobile from '../js/menuMobile'
@@ -59,18 +60,16 @@ window.addEventListener("orientationchange", getBasic);
 
 document.addEventListener('scroll', function () {
 	scrollMarkers();
-	setActiveMenuItem(menu_items, sections_scroll);
 	smartMenu();
 });
 
+document.addEventListener('DOMContentLoaded', function () {
+	smoothAnchors();
+});
 
-// document.addEventListener('DOMContentLoaded', function () {
-// 	menuScrollStatus();
-// });
-
-// document.addEventListener('astro:after-swap', function () {
-// 	menuScrollStatus();
-// });
+document.addEventListener('astro:after-swap', function () {
+	smoothAnchors();
+});
 
 
 /*/////////////////////////////////////////////////////////////////////*/

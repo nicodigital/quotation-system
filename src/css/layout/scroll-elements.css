@@ -10,6 +10,7 @@
       xg:translate-y-[200%]
       transition-all
       rounded-full
+      cursor-pointer
       z-[99];
 
       svg{

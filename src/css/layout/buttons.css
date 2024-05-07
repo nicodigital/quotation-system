@@ -1,28 +1,47 @@
 .btn {
 
   @apply 
-    flex items-center justify-center
+    flex items-center justify-center items-center
     w-[fit-content]
-    rounded-lg 
-    px-[2.5rem] xg:px-4 py-[1.6rem] 
+    rounded-full 
+    px-[2.5rem] xg:px-3 py-[1.2rem] 
     border-solid border-[2px] border-transparent 
     transition-all ;
 
-  &-blue{
-    @apply bg-blue hover:bg-red;
-  }
-
-  &-red{
-    @apply bg-red hover:bg-blue;
-  }
-
   &-outline{
     @apply border-solid
-     border-white 
+     border-black 
      border-[2px]
-     hover:bg-white
-    hover:text-blue;
-     ;
+     hover:bg-black
+    hover:text-white;
+  }
+  
+
+}
+
+.btn-lock{
+  @apply btn btn-outline;
+
+  svg{
+
+    &:last-child{
+      display: none;
+    }
+
+  }
+
+  &:hover{
+
+    svg{
+
+      display: none;
+
+      &:last-child{
+        display: block;
+      }
+  
+    }
+
   }
 
 }
