@@ -3,7 +3,7 @@ export const prerender = false;
 import { Icon } from "astro-icon/components";
 import Layout from "../../layout/Layout.astro";
 import Heading from "../../components/Heading.astro";
-import formatDate from '../../js/formatDate';
+import formatDate from "../../js/formatDate";
 
 const getPass = atob(Astro.url.searchParams.get("p")! || "");
 
@@ -31,7 +31,6 @@ const response = await fetch(import.meta.env.API_QUOTES);
 const QUOTES = await response.json();
 const currQuote = QUOTES.find((q) => q.slug == quote);
 const formattedDate = formatDate(currQuote.date);
-
 ---
 
 <Layout
@@ -42,50 +41,57 @@ const formattedDate = formatDate(currQuote.date);
   <div class="container">
     <section class="scroll-case row section-b md:mb-5 xg:mb-0">
       <div class="col-[1/5] md:col-[1/13] xg:col-[3/11] pl-2 xg:pl-0">
-
         {
-           currQuote.acf.pass === getPass && (
-            <div class="wp-block-columns">
-                <div class="wp-block-column" style="flex-basis:33.33%"> &nbsp; </div>
-                <div class="wp-block-column mb-0" style="flex-basis:66.66%">
-                  <h1 class="text-big">
-                    {currQuote.title.rendered}
-                  </h1>
+          currQuote.acf.pass === getPass && (
+            <>
+              <div class="wp-block-columns">
+                <div class="wp-block-column" style="flex-basis:33.33%">
+                  {" "}
+                  &nbsp;{" "}
                 </div>
-            </div>
-            <Heading serv={currQuote.acf.service} />
-            <Fragment set:html={currQuote.content.rendered} />
-            )
+                <div class="wp-block-column mb-0" style="flex-basis:66.66%">
+                  <h1 class="text-big">{currQuote.title.rendered}</h1>
+                </div>
+              </div>
+              <Heading serv={currQuote.acf.service} />
+              <Fragment set:html={currQuote.content.rendered} />
+            </>
+          )
         }
 
         {
           currQuote.acf.pass != getPass && (
             <div class="wp-block-columns min-h-screen xg:pt-5">
-                <div class="wp-block-column" style="flex-basis:33.33%"> </div>
-                <div class="wp-block-column mb-0" style="flex-basis:66.66%">
-                  <h2 class="text-h2 mb-2 font-bold flex items-center gap-1" >
-                    <Icon name="mdi:lock-alert" size="4rem" /> Contraseña
-                  </h2>
-                  <p class="text-smalll xg:w-50%">
-                    Debes ingresas la contraseña para visualizar el presupuesto.
-                  </p>
-                  <form action="" id="passForm" name="form" class="xg:w-60% mt-4">
-                    <div class="field flex flex-col gap-2">
-                      <input type="hidden" name="slug" value={currQuote.slug} >
-                      <input type="password" placeholder="Pega aquí la contraseña" name="user_pass">
-                        <div id="result"></div>
-                        <button class="btn-lock">
-                            <span class="mr-1">entrar</span>
-                            <Icon name="mdi:lock" size="2rem" />
-                            <Icon name="mdi:lock-open" size="2rem" />
-                        </button>
-                    </div>
-                  </form>
-                </div>
+              <div class="wp-block-column" style="flex-basis:33.33%">
+                {" "}
+              </div>
+              <div class="wp-block-column mb-0" style="flex-basis:66.66%">
+                <h2 class="text-h2 mb-2 font-bold flex items-center gap-1">
+                  <Icon name="mdi:lock-alert" size="4rem" /> Contraseña
+                </h2>
+                <p class="text-smalll xg:w-50%">
+                  Debes ingresas la contraseña para visualizar el presupuesto.
+                </p>
+                <form action="" id="passForm" name="form" class="xg:w-60% mt-4">
+                  <div class="field flex flex-col gap-2">
+                    <input type="hidden" name="slug" value={currQuote.slug} />
+                    <input
+                      type="password"
+                      placeholder="Pega aquí la contraseña"
+                      name="user_pass"
+                    />
+                    <div id="result" />
+                    <button class="btn-lock">
+                      <span class="mr-1">entrar</span>
+                      <Icon name="mdi:lock" size="2rem" />
+                      <Icon name="mdi:lock-open" size="2rem" />
+                    </button>
+                  </div>
+                </form>
+              </div>
             </div>
           )
         }
-          
       </div>
     </section>
   </div>
@@ -94,4 +100,10 @@ const formattedDate = formatDate(currQuote.date);
 <script>
   import sendPass from "@/js/sendPass";
   sendPass();
+  document.addEventListener('DOMContentLoaded', function() {
+    const url = new URL(window.location.href);
+    url.search = '';
+    const newUrl = url.toString();
+    window.history.replaceState({}, '', newUrl);
+});
 </script>
