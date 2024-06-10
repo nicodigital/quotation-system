@@ -43,19 +43,17 @@ const formattedDate = formatDate(currQuote.date);
       <div class="col-[1/5] md:col-[1/13] xg:col-[3/11] pl-2 xg:pl-0">
         {
           currQuote.acf.pass === getPass && (
-            <>
               <div class="wp-block-columns">
                 <div class="wp-block-column" style="flex-basis:33.33%">
                   {" "}
                   &nbsp;{" "}
                 </div>
                 <div class="wp-block-column mb-0" style="flex-basis:66.66%">
-                  <h1 class="text-big">{currQuote.title.rendered}</h1>
+                  <h1 class="text-big leading-[1] mb-6">{currQuote.title.rendered}</h1>
                 </div>
               </div>
               <Heading serv={currQuote.acf.service} />
               <Fragment set:html={currQuote.content.rendered} />
-            </>
           )
         }
 
