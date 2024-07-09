@@ -3,6 +3,7 @@ export const prerender = false;
 import { Icon } from "astro-icon/components";
 import Layout from "../../layout/Layout.astro";
 import Heading from "../../components/Heading.astro";
+import decodeHTMLtxt from "../../js/decodeHTMLtxt";
 import formatDate from "../../js/formatDate";
 
 const getPass = atob(Astro.url.searchParams.get("p")! || "");
@@ -31,6 +32,7 @@ const response = await fetch(import.meta.env.API_QUOTES);
 const QUOTES = await response.json();
 const currQuote = QUOTES.find((q) => q.slug == quote);
 const formattedDate = formatDate(currQuote.date);
+
 ---
 
 <Layout
@@ -49,7 +51,7 @@ const formattedDate = formatDate(currQuote.date);
                   &nbsp;{" "}
                 </div>
                 <div class="wp-block-column mb-0" style="flex-basis:66.66%">
-                  <h1 class="text-big leading-[1] mb-6">{currQuote.title.rendered}</h1>
+                  <h1 class="text-big leading-[1] mb-6">{ decodeHTMLtxt(currQuote.title.rendered) }</h1>
                 </div>
               </div>
               <Heading serv={currQuote.acf.service} />
