@@ -12,7 +12,7 @@ if( lang == "pt" ){
   servTxt = "Servicio";
   valTxt = "Validez";
   contTxt = "Contacto";
-  discTxt = "Este presupuesto tiene una validez de 30 día <br> desde la fecha de presentación del mismo.";
+  discTxt = "Este orçamento é válido por 30 dias <br> a contar da data da sua apresentação.";
 }
 
 ---
@@ -33,7 +33,7 @@ if( lang == "pt" ){
       <h2 class="wp-block-heading" id="intro"> { valTxt } </h2>
     </div>
     <div class="wp-block-column" style="flex-basis:66.66%">
-      {discTxt}
+      <Fragment set:html={discTxt} />
     </div>
   </div>
 
