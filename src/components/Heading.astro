@@ -1,16 +1,18 @@
 ---
 const { serv = "Desarrollo web", lang = "es" } = Astro.props;
 
-let servTxt, valTxt, contTxt;
+let servTxt, valTxt, contTxt, discTxt;
 
 if( lang == "pt" ){
   servTxt= "Serviço";
   valTxt = "Validade";
   contTxt = "Contato";
+  discTxt = "Este presuposto tem uma validade de 30 dias <br> a partir da data de apresentação do mesmo.";
 }else{
   servTxt = "Servicio";
   valTxt = "Validez";
   contTxt = "Contacto";
+  discTxt = "Este presupuesto tiene una validez de 30 día <br> desde la fecha de presentación del mismo.";
 }
 
 ---
@@ -31,8 +33,7 @@ if( lang == "pt" ){
       <h2 class="wp-block-heading" id="intro"> { valTxt } </h2>
     </div>
     <div class="wp-block-column" style="flex-basis:66.66%">
-      Este presupuesto tiene una validez de 30 días  <br>
-      desde la fecha de presentación del mismo.
+      {discTxt}
     </div>
   </div>
 
