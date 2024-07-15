@@ -34,6 +34,8 @@ const currQuote = QUOTES.find((q) => q.slug == quote);
 const formattedDate = formatDate(currQuote.date);
 const TITLE = decodeHTMLtxt(currQuote.title.rendered);
 
+const LANG = currQuote.acf.lang;
+
 ---
 
 <Layout
@@ -55,7 +57,7 @@ const TITLE = decodeHTMLtxt(currQuote.title.rendered);
                   <h1 class="text-big leading-[1] mb-6">{ TITLE }</h1>
                 </div>
               </div>
-              <Heading serv={currQuote.acf.service} />
+              <Heading serv={currQuote.acf.service} lang={LANG} />
               <Fragment set:html={currQuote.content.rendered} />
           )
         }
