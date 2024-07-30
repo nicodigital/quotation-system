@@ -25,6 +25,10 @@ h3.wp-block-heading{
   @apply text-h3
 }
 
+.wp-block-column ul ul {
+  padding-left: 2rem;
+}
+
 .price{
   @apply mt-[-6rem];
 }
