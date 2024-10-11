@@ -1,66 +1,61 @@
-function sendPass(){
+function sendPass() {
+  const passForm = document.querySelector("#passForm");
+  const result = document.getElementById('result');
 
-    const passForm = document.querySelector("#passForm");
-    const result = document.getElementById('result');
-  
-    if ( passForm ) {
-
+  if (passForm) {
+    passForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
       const slug = passForm.querySelector('[name=slug]').value;
-      const ajax_url = 'https://nicowebsite.com/docs/wp-json/wp/v2/quotation?slug=' + slug;
-      let pass = '';
-      let passCoded = "";
-      // console.log(ajax_url)
+      const user_pass = passForm.querySelector('[name=user_pass]').value;
+      const ajax_url = `https://nicowebsite.com/docs/wp-json/wp/v2/quotation?slug=${slug}`;
 
-      passForm.addEventListener("submit", async (e) => {
-        e.preventDefault();
-
-        fetch( ajax_url , {
+      try {
+        // Intento 1: Usando mode: 'cors' explícitamente
+        const response = await fetch(ajax_url, {
           method: 'GET',
+          mode: 'cors',
           headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
           },
-        }).then(async (response) => {
+        });
 
-            let json = await response.json();
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
 
-            if (response.status == 200) {
+        const json = await response.json();
+        const pass = json[0]?.acf?.pass;
 
-              const user_pass = passForm.querySelector('[name=user_pass]').value;
-              pass = json[0].acf.pass;
+        if (user_pass === pass) {
+          const passCoded = btoa(user_pass);
+          window.location.href = `/quotes/${slug}?p=${passCoded}`;
+        } else {
+          result.innerHTML = "😭 Ups... esa no es la contraseña.";
+        }
+      } catch (error) {
+        console.error('Fetch error:', error);
 
-              passCoded = btoa(user_pass); // Codifica en base64
+        // Intento 2: Usar JSONP como fallback
+        const script = document.createElement('script');
+        const callbackName = 'jsonpCallback_' + Math.round(100000 * Math.random());
+        window[callbackName] = function(data) {
+          const pass = data[0]?.acf?.pass;
+          if (user_pass === pass) {
+            const passCoded = btoa(user_pass);
+            window.location.href = `/quotes/${slug}?p=${passCoded}`;
+          } else {
+            result.innerHTML = "😭 Ups... esa no es la contraseña.";
+          }
+          delete window[callbackName];
+          document.body.removeChild(script);
+        };
 
-              if( user_pass === pass ){
-                window.location.href ="/quotes/"+ slug+"?p="+passCoded;
-              }else{
-                result.innerHTML = "😭 Ups... esa no es la contraseña.";
-              }
-
-            } else {
-              console.log(response);
-              // result.innerHTML = json.message;
-            }
-
-          }).catch(error => {
-
-            console.log(error);
-            result.innerHTML = "😭 Wrong password. Try again.";
-
-          }).then(function () {
-
-            // passForm.reset();
-            // setTimeout(() => {
-            //   result.style.display = "none";
-            // }, 3000);
-
-          });
-
-      })
-
-    }
-
-
+        script.src = `${ajax_url}&callback=${callbackName}`;
+        document.body.appendChild(script);
+      }
+    });
+  }
 }
 
-export default sendPass
+export default sendPass;
