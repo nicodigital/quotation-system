@@ -1,66 +1,46 @@
-function sendPass(){
+function sendPass() {
+  const passForm = document.querySelector("#passForm");
+  const result = document.getElementById('result');
 
-    const passForm = document.querySelector("#passForm");
-    const result = document.getElementById('result');
-  
-    if ( passForm ) {
-
+  if (passForm) {
+    passForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
       const slug = passForm.querySelector('[name=slug]').value;
-      const ajax_url = 'https://nicowebsite.com/docs/wp-json/wp/v2/quotation?slug=' + slug;
-      let pass = '';
-      let passCoded = "";
-      // console.log(ajax_url)
+      const user_pass = passForm.querySelector('[name=user_pass]').value;
+      const ajax_url = 'https://nicowebsite.com/docs/wp-json/custom/v1/check-password';
 
-      passForm.addEventListener("submit", async (e) => {
-        e.preventDefault();
-
-        fetch( ajax_url , {
-          method: 'GET',
+      try {
+        const response = await fetch(ajax_url, {
+          method: 'POST',
+          mode: 'cors',
           headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
           },
-        }).then(async (response) => {
+          body: JSON.stringify({
+            slug: slug,
+            password: user_pass
+          })
+        });
 
-            let json = await response.json();
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
 
-            if (response.status == 200) {
-
-              const user_pass = passForm.querySelector('[name=user_pass]').value;
-              pass = json[0].acf.pass;
-
-              passCoded = btoa(user_pass); // Codifica en base64
-
-              if( user_pass === pass ){
-                window.location.href ="/quotes/"+ slug+"?p="+passCoded;
-              }else{
-                result.innerHTML = "😭 Ups... esa no es la contraseña.";
-              }
-
-            } else {
-              console.log(response);
-              // result.innerHTML = json.message;
-            }
-
-          }).catch(error => {
-
-            console.log(error);
-            result.innerHTML = "😭 Wrong password. Try again.";
-
-          }).then(function () {
-
-            // passForm.reset();
-            // setTimeout(() => {
-            //   result.style.display = "none";
-            // }, 3000);
-
-          });
-
-      })
-
-    }
-
-
+        const json = await response.json();
+        
+        if (json.success) {
+          const passCoded = btoa(user_pass);
+          window.location.href = `/quotes/${slug}?p=${passCoded}`;
+        } else {
+          result.innerHTML = "😭 Ups... esa no es la contraseña.";
+        }
+      } catch (error) {
+        console.error('Fetch error:', error);
+        result.innerHTML = "😭 Error al verificar la contraseña. Intente nuevamente.";
+      }
+    });
+  }
 }
 
-export default sendPass
+export default sendPass;
