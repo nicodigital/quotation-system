@@ -36,12 +36,22 @@ const TITLE = decodeHTMLtxt(currQuote.title.rendered);
 
 const LANG = currQuote.acf.lang;
 
+let titlePT = "";
+let descPT = "";
+if (LANG === 'pt') {
+  titlePT = `${currQuote.title.rendered} — "Orçamento Web por" • ${formattedDate}`;
+  descPT = `Orçamento Web realizado por Nicolás González, el ${formattedDate}, para ${currQuote.title.rendered}`;
+}else{
+  titlePT = `${currQuote.title.rendered} — Presupuesto Web por Nicolás González • ${formattedDate}`;
+  descPT = `Presupuesto Web realizado por Nicolás González, el ${formattedDate}, para ${currQuote.title.rendered}`;
+}
+
 ---
 
 <Layout
-  title={` ${currQuote.title.rendered} — Presupuesto Web por Nicolás González • ${formattedDate}`}
+  title={titlePT}
   claim=""
-  description={`Presupuesto Web realizado por Nicolás González, el ${formattedDate}, para ${currQuote.title.rendered} `}
+  description={descPT}
   lang={LANG}
 >
   <div class="container">
