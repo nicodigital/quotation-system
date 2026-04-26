@@ -10,7 +10,7 @@
   }
 }
 
-.link-underline{
+.link-underline, #content a{
   width: fit-content;
   text-decoration: none;
   background-image: linear-gradient(currentColor, currentColor);
