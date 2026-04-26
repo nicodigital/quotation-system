@@ -12,6 +12,8 @@ const QUOTES = await response.json();
 const currQuote = QUOTES.find((quote) => quote.slug == currPage);
 const formattedDate = formatDate(currQuote.date);
 
+const { lang = 'es' } = Astro.props;
+
 ---
 <footer class="container row pt-5 pb-10 xg:py-6 items-end" >
 
@@ -25,9 +27,11 @@ const formattedDate = formatDate(currQuote.date);
             <div class="wp-block-column mb-0" style="flex-basis:33.33%"> &nbsp; </div>
             
             <div class="wp-block-column mb-0 flex items-end" style="flex-basis:33.33%">
+
                 <p class="text-small mb-0">
-                    Cotización realizada <br> el {formattedDate}
+                    {lang === 'pt' ? 'Cotação realizada' : 'Cotización realizada'} <br> {lang === 'pt' ? 'em' : 'el'} {formattedDate}
                 </p>
+
             </div>
 
             <div class="wp-block-column mb-0 flex flex-col text-small" style="flex-basis:33.33%">
