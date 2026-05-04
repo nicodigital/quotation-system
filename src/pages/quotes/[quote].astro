@@ -6,7 +6,13 @@ import Heading from "../../components/Heading.astro";
 import decodeHTMLtxt from "../../js/decodeHTMLtxt";
 import formatDate from "../../js/formatDate";
 
-const getPass = atob(Astro.url.searchParams.get("p")! || "");
+let getPass = "";
+try {
+  const passParam = Astro.url.searchParams.get("p") || "";
+  getPass = atob(passParam);
+} catch {
+  getPass = "";
+}
 
 // Esta función solo es necesaria en caso de preRendered
 // export async function getStaticPaths() {
@@ -28,22 +34,39 @@ const getPass = atob(Astro.url.searchParams.get("p")! || "");
 // }
 
 const { quote } = Astro.params;
-const response = await fetch(import.meta.env.API_QUOTES);
-const QUOTES = await response.json();
-const currQuote = QUOTES.find((q) => q.slug == quote);
-const formattedDate = formatDate(currQuote.date);
-const TITLE = decodeHTMLtxt(currQuote.title.rendered);
+let QUOTES = [];
 
-const LANG = currQuote.acf.lang;
+try {
+  const response = await fetch(import.meta.env.API_QUOTES);
+  const quotesData = await response.json();
+  QUOTES = Array.isArray(quotesData) ? quotesData : [];
+} catch {
+  QUOTES = [];
+}
+
+const currQuote = QUOTES.find((q) => q.slug == quote);
+const rawTitle = currQuote?.title?.rendered ?? "Presupuesto";
+const formattedDate = currQuote?.date ? formatDate(currQuote.date) : "";
+const TITLE = decodeHTMLtxt(rawTitle);
+
+const LANG = currQuote?.acf?.lang ?? "es";
+const service = currQuote?.acf?.service ?? "";
+const quoteContent = currQuote?.content?.rendered ?? "";
+const hasMenu = (currQuote?.acf?.menu_items?.length ?? 0) > 0;
+const quoteFound = Boolean(currQuote);
+
+if (!quoteFound) {
+  Astro.response.status = 404;
+}
 
 let titlePT = "";
 let descPT = "";
 if (LANG === 'pt') {
-  titlePT = `${currQuote.title.rendered} — "Orçamento Web por" • ${formattedDate}`;
-  descPT = `Orçamento Web realizado por Nicolás González, el ${formattedDate}, para ${currQuote.title.rendered}`;
+  titlePT = `${rawTitle} — "Orçamento Web por" • ${formattedDate}`;
+  descPT = `Orçamento Web realizado por Nicolás González, el ${formattedDate}, para ${rawTitle}`;
 }else{
-  titlePT = `${currQuote.title.rendered} — Presupuesto Web por Nicolás González • ${formattedDate}`;
-  descPT = `Presupuesto Web realizado por Nicolás González, el ${formattedDate}, para ${currQuote.title.rendered}`;
+  titlePT = `${rawTitle} — Presupuesto Web por Nicolás González • ${formattedDate}`;
+  descPT = `Presupuesto Web realizado por Nicolás González, el ${formattedDate}, para ${rawTitle}`;
 }
 
 ---
@@ -53,11 +76,14 @@ if (LANG === 'pt') {
   claim=""
   description={descPT}
   lang={LANG}
+  hasMenu={hasMenu}
 >
   <div class="container">
     <section class="scroll-case row section-b md:mb-5 xg:mb-0">
       <div id="content" class="col-[1/5] md:col-[1/13] xg:col-[3/11] pl-2 xg:pl-0">
         {
+          quoteFound ? (
+            <>
               <div class="wp-block-columns">
                 <div class="wp-block-column" style="flex-basis:33.33%">
                   {" "}
@@ -67,8 +93,12 @@ if (LANG === 'pt') {
                   <h1 class="text-big leading-[1] mb-6">{ TITLE }</h1>
                 </div>
               </div>
-              <Heading serv={currQuote.acf.service} lang={LANG} />
-              <Fragment set:html={currQuote.content.rendered} />
+              <Heading serv={service} lang={LANG} />
+              <Fragment set:html={quoteContent} />
+            </>
+          ) : (
+            <p>Este presupuesto no está disponible.</p>
+          )
         }
       </div>
     </section>
