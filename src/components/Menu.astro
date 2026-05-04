@@ -6,30 +6,46 @@ import "../css/layout/menu.css";
 const currentPath = Astro.url.pathname;
 const  quote = getSlug(currentPath);
 
-const response = await fetch(import.meta.env.API_QUOTES);
-const QUOTES = await response.json();
-const currQuote = QUOTES.find((q) => q.slug == quote);
+let menuItems = [];
+let safeMenuItems = [];
+
+try {
+  const response = await fetch(import.meta.env.API_QUOTES);
+  const QUOTES = await response.json();
+  const currQuote = QUOTES.find((q) => q.slug == quote);
+  menuItems = currQuote?.acf?.menu_items ?? [];
+} catch {
+  menuItems = [];
+}
+
+safeMenuItems = menuItems.filter((item) => {
+  return item?.icon && item?.label && item?.ancla;
+});
 // console.log(currentPath)
 ---
 
-<nav>
-  {
-    currQuote.acf.menu_items.map((item) => {
+{
+  safeMenuItems.length > 0 && (
+    <nav>
+      {
+        safeMenuItems.map((item) => {
 
-      const currAnchor = '#'+ item.ancla;
+          const currAnchor = '#'+ item.ancla;
 
-      return(
-          <div class="anchor" data-anchor={currAnchor} >
-            <span>
-              <Icon name={item.icon} size="2rem" />
-            </span>
-            <span>{item.label}</span>
-          </div>
-        );
- 
-    })
-  }
-</nav>
+          return(
+              <div class="anchor" data-anchor={currAnchor} >
+                <span>
+                  <Icon name={item.icon} size="2rem" />
+                </span>
+                <span>{item.label}</span>
+              </div>
+            );
+
+        })
+      }
+    </nav>
+  )
+}
 
 
 <!-- <script>

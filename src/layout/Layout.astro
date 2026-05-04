@@ -23,6 +23,7 @@ const {
   author_url = siteURL,
   robots = true,
   lang = 'es',
+  hasMenu = true,
 } = Astro.props;
 
 /* Get Page */
@@ -62,11 +63,22 @@ if( currPage === '' ){
 
     <div class="flex w-full flex-1 gap-2">
 
-      <aside class="w-[var(--sidebar-width)] fixed flex flex-col justify-center top-0 left-0 bg-black h-[100lvh] z-50">
-           <Menu/>
-      </aside>
+      {
+        hasMenu && (
+          <aside class="w-[var(--sidebar-width)] fixed flex flex-col justify-center top-0 left-0 bg-black h-[100lvh] z-50">
+            <Menu />
+          </aside>
+        )
+      }
 
-      <div class="flex-1 w-[calc(100% - var(--sidebar-width))] ml-[var(--sidebar-width)]">
+      <div
+        class:list={[
+          "flex-1",
+          hasMenu
+            ? "w-[calc(100% - var(--sidebar-width))] ml-[var(--sidebar-width)]"
+            : "w-full ml-0",
+        ]}
+      >
         <Header />
           <main>
             <slot />
