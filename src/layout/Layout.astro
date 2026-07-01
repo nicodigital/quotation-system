@@ -63,22 +63,7 @@ if( currPage === '' ){
 
     <div class="flex w-full flex-1 gap-2">
 
-      {
-        hasMenu && (
-          <aside class="w-[var(--sidebar-width)] fixed flex flex-col justify-center top-0 left-0 bg-black h-[100lvh] z-50">
-            <Menu />
-          </aside>
-        )
-      }
-
-      <div
-        class:list={[
-          "flex-1",
-          hasMenu
-            ? "w-[calc(100% - var(--sidebar-width))] ml-[var(--sidebar-width)]"
-            : "w-full ml-0",
-        ]}
-      >
+      <div class="flex-1 w-full ml-0">
         <Header />
           <main>
             <slot />
