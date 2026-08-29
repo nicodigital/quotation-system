@@ -62,7 +62,7 @@ if( currPage === '' ){
 
     <div class="flex w-full flex-1 gap-2">
 
-      <div class="flex-1 w-full ml-0">
+      <div class="flex-1 w-full ml-0" id={dataPage === "quotes" ? "quote-document" : undefined}>
         <Header />
           <main>
             <slot />

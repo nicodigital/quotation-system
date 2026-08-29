@@ -41,6 +41,38 @@ h3.wp-block-heading{
   @apply hidden xg:block;
 }
 
+ul.wp-block-list li {
+  margin-bottom: 1.5rem;
+}
+
+.pdf-download {
+  @apply shrink-0 bg-transparent border-0 p-0 m-0 cursor-pointer leading-none text-inherit opacity-80 hover:opacity-100 transition-opacity;
+
+  &[aria-busy="true"],
+  &:disabled {
+    @apply opacity-40 cursor-wait;
+  }
+}
+
+.heading {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  @page {
+    size: A4;
+    margin: 12mm;
+  }
+
+  a {
+    color: inherit;
+  }
+}
 
 /*//////////////////////////////////////////////////////////*/
 /*///////////////////////// 768px //////////////////////////*/
@@ -48,8 +80,12 @@ h3.wp-block-heading{
 
 @media (min-width: theme("screens.md")) {
 
-  :not(.heading) > .wp-block-columns > .wp-block-column:not(.mb-0):not([style]){
+  :not(.heading) > .wp-block-columns:has(> :nth-child(2):last-child) > .wp-block-column:not(.mb-0){
     @apply mb-10;
+  }
+
+  :not(.heading) > .wp-block-columns:has(> :nth-child(3):last-child) > .wp-block-column:not(.mb-0){
+    @apply mb-3 pr-3;
   }
   
 }

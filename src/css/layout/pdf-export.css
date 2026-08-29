@@ -1,0 +1,232 @@
+/* Estilos del documento PDF. Se aplican al clon de exportación, no a la web. */
+
+.pdf-export {
+  --html: 12px !important;
+  --text-big: 22px !important;
+  --h1: 18px !important;
+  --h2: 13px !important;
+  --h3: 12px !important;
+  --text-body: 12px !important;
+  --small: 11px !important;
+  --container-gap: 0px !important;
+  font-size: 12px !important;
+  line-height: 1.45 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 8px 4px 24px !important;
+  box-sizing: border-box !important;
+  overflow: visible !important;
+  background: #fff !important;
+  color: #121212 !important;
+}
+
+.pdf-export .no-print,
+.pdf-export #go-top,
+.pdf-export #whatsapp {
+  display: none !important;
+}
+
+.pdf-export .container,
+.pdf-export .row,
+.pdf-export .scroll-case,
+.pdf-export main,
+.pdf-export #content,
+.pdf-export [class*="col-"] {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  grid-template-columns: none !important;
+  grid-column: auto !important;
+  gap: 0 !important;
+}
+
+.pdf-export .wp-block-columns {
+  display: block !important;
+  width: 100% !important;
+  flex-direction: column !important;
+  gap: 0 !important;
+  margin: 0 0 14px !important;
+}
+
+.pdf-export .wp-block-column {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  flex: none !important;
+  flex-basis: auto !important;
+  padding: 0 !important;
+  overflow: visible !important;
+}
+
+.pdf-export h1,
+.pdf-export .text-big {
+  font-size: 22px !important;
+  line-height: 1.2 !important;
+  font-weight: 700 !important;
+  margin: 0 0 18px !important;
+  text-wrap: wrap !important;
+  overflow-wrap: break-word !important;
+  word-break: break-word !important;
+  overflow: visible !important;
+}
+
+.pdf-export h2,
+.pdf-export h2.wp-block-heading,
+.pdf-export .text-h2 {
+  font-size: 13px !important;
+  line-height: 1.3 !important;
+  font-weight: 700 !important;
+  margin: 0 0 4px !important;
+}
+
+.pdf-export h3,
+.pdf-export h3.wp-block-heading,
+.pdf-export .text-h3 {
+  font-size: 12px !important;
+  line-height: 1.3 !important;
+  font-weight: 700 !important;
+  margin: 0 0 4px !important;
+}
+
+.pdf-export p,
+.pdf-export li,
+.pdf-export .wp-block-column {
+  font-size: 12px !important;
+  line-height: 1.45 !important;
+  overflow-wrap: break-word !important;
+  word-break: break-word !important;
+}
+
+.pdf-export .heading {
+  display: block !important;
+  gap: 0 !important;
+  margin: 0 0 22px !important;
+}
+
+.pdf-export .heading > .wp-block-columns {
+  margin-bottom: 12px !important;
+}
+
+.pdf-export header.container,
+.pdf-export header {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  justify-content: space-between !important;
+  align-items: flex-start !important;
+  gap: 12px !important;
+  height: auto !important;
+  min-height: 0 !important;
+  padding: 0 0 16px !important;
+  margin: 0 0 12px !important;
+}
+
+.pdf-export header > div {
+  width: auto !important;
+  max-width: 65% !important;
+  padding: 0 !important;
+}
+
+.pdf-export header > div:nth-child(2) {
+  display: none !important;
+}
+
+.pdf-export header > div:last-child {
+  display: block !important;
+  margin-left: auto !important;
+  max-width: 35% !important;
+  text-align: right !important;
+  font-size: 11px !important;
+}
+
+.pdf-export header .hidden {
+  display: block !important;
+}
+
+.pdf-export header figure,
+.pdf-export footer figure {
+  margin: 0 !important;
+}
+
+.pdf-export header figure svg,
+.pdf-export footer figure svg {
+  width: 140px !important;
+  max-width: 140px !important;
+  height: auto !important;
+  transform: none !important;
+}
+
+.pdf-export footer {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  padding: 20px 0 0 !important;
+  margin: 24px 0 0 !important;
+}
+
+.pdf-export footer .text-small,
+.pdf-export .text-small {
+  font-size: 11px !important;
+  line-height: 1.4 !important;
+}
+
+.pdf-export .price {
+  margin-top: 0 !important;
+}
+
+.pdf-export .section-b {
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.pdf-export a {
+  color: inherit !important;
+  background-image: none !important;
+  text-decoration: none !important;
+}
+
+.pdf-export ul {
+  padding-left: 1.2em !important;
+}
+
+.pdf-export .wp-block-spacer {
+  display: block !important;
+  height: 6px !important;
+  max-height: 6px !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 0 !important;
+}
+
+.pdf-export .wp-block-spacer[class*="xg:hidden"] {
+  display: none !important;
+}
+
+.pdf-export .wp-block-column {
+  margin-top: 0 !important;
+  margin-bottom: 8px !important;
+}
+
+.pdf-export h1,
+.pdf-export h2,
+.pdf-export h3,
+.pdf-export h4,
+.pdf-export p,
+.pdf-export li,
+.pdf-export ul,
+.pdf-export ol,
+.pdf-export img,
+.pdf-export figure,
+.pdf-export header,
+.pdf-export footer,
+.pdf-export .heading,
+.pdf-export .wp-block-columns {
+  break-inside: avoid !important;
+  page-break-inside: avoid !important;
+}

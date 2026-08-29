@@ -90,7 +90,19 @@ if (LANG === 'pt') {
                   &nbsp;{" "}
                 </div>
                 <div class="wp-block-column mb-0" style="flex-basis:66.66%">
-                  <h1 class="text-big leading-[1] mb-6">{ TITLE }</h1>
+                  <div class="flex items-start justify-between gap-4 mb-6">
+                    <h1 class="text-big leading-[1] mb-0">{ TITLE }</h1>
+                    <button
+                      type="button"
+                      id="download-pdf"
+                      class="pdf-download no-print"
+                      data-filename={`${quote}.pdf`}
+                      aria-label={LANG === "pt" ? "Baixar PDF" : "Descargar PDF"}
+                      title={LANG === "pt" ? "Baixar PDF" : "Descargar PDF"}
+                    >
+                      <Icon name="mdi:file-pdf-box" class="size-[2.8rem] xg:size-[3.6rem]" />
+                    </button>
+                  </div>
                 </div>
               </div>
               <Heading serv={service} lang={LANG} />
@@ -103,4 +115,7 @@ if (LANG === 'pt') {
       </div>
     </section>
   </div>
+  <script>
+    import "../../js/downloadQuotePdf.js";
+  </script>
 </Layout>

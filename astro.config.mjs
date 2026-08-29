@@ -18,5 +18,10 @@ export default defineConfig({
   base: '/',
 
   adapter: netlify(),
-  prefetch: true
+  prefetch: true,
+  vite: {
+    optimizeDeps: {
+      include: ["html2pdf.js"],
+    },
+  },
 });
