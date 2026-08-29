@@ -48,7 +48,7 @@ h3.wp-block-heading{
 
 @media (min-width: theme("screens.md")) {
 
-  :not(.heading) > .wp-block-columns > .wp-block-column:not(.mb-0){
+  :not(.heading) > .wp-block-columns > .wp-block-column:not(.mb-0):not([style]){
     @apply mb-10;
   }
   
