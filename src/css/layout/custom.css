@@ -29,10 +29,6 @@ h3.wp-block-heading{
   padding-left: 2rem;
 }
 
-.price{
-  @apply mt-[-6rem];
-}
-
 .price-mobile{
   @apply xg:hidden;
 }
